@@ -85,7 +85,7 @@ Foundation µFeatures contain foundational tools *(wrappers, extensions, ...)* t
 
 In practice, foundation µFeatures expose **Interfaces (Structs, Classes, Enums)** and **extensions** of platform frameworks such as `XCTest`, `Foundation` or `UIKit`. 
 
-> Note: Foundation µFeatures don't expose static instances that are globally accessed. As we'll see later, it's up to the app to control the lifecycle of those foundation dependencies, and pass them to other µFeatures using dependency injection.
+> :warning: Note: Foundation µFeatures shouldn't expose static instances that are globally accessed. As we'll see later, it's up to the app to control the lifecycle of those foundation dependencies, and pass them to other µFeatures using dependency injection.
 
 ### Product
 
