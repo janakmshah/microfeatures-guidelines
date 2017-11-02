@@ -12,6 +12,7 @@
 - [Types of µFeatures](#types-of-µfeatures-)
 - [Layers](#layers-)
 - [Dependencies](#dependencies-)
+- [Multiplatform µFeatures](multiplatform-µfeatures-)
 - [Shortcomings](#shortcomings-)
 
 ## What 🤔
@@ -78,7 +79,7 @@ Reusing code across apps and other products like extensions is encouraged using 
 ## Types of µFeatures 🐤
 
 ### Foundation
-Foundation µFeatures contain foundational tools *(wrappers, extensions, ...)* that are combined to build other µFeatures. Thus all other µFeatures have access to the foundation ones. Some examples of foundations µFeatures are:
+Foundation µFeatures contain foundational tools *(wrappers, extensions, ...)* that are combined to build other µFeatures. Thus other µFeatures have access to the foundation ones. Some examples of foundations µFeatures are:
 
 - **µUI:** Provides custom views, UIKit extensions, fonts, and colors that are used to build user-facing layouts.
 - **µTesting:** Facilitates testing by providing XCTest extensions as well as custom assertions.
@@ -94,9 +95,10 @@ In practice, foundation µFeatures expose **Interfaces (Structs, Classes, Enums)
 ## Layers 🐬
 
 
-
 ## Dependencies ⚙️
 
+## Multiplatform µFeatures ⌚️📱💻📺
+//TODO
 
 ## Shortcomings 🙈
 #### Maintenance
