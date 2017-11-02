@@ -12,10 +12,11 @@
 - [Types of µFeatures](#types-of-µfeatures-)
 - [Layers](#layers-)
 - [Dependencies](#dependencies-)
+- [Shortcomings](#shortcomings-)
 
 ## What 🤔
 
-uFeatures is a architectural approach to structure iOS applications to enable scalability, optimizing build and testing cycles, and ensuring good practices in your team. Its core idea is to build your apps by building independent features that are interconnected using clear and concise APIS.
+uFeatures is an architectural approach to structure iOS applications to enable scalability, optimizing build and testing cycles, and ensuring good practices in your team. Its core idea is to build your apps by building independent features that are interconnected using clear and concise APIS.
 
 This manifesto introduces the principles of the architecture, helping you identify and organize your application features in different layers. It also introduces tips, tools and advices if you decide for this architecture.
 
@@ -40,7 +41,7 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 - Don't expect this to be a silver-bullet to your problems. You should take the core ideas, process them, and apply the principles to your project/s.
 - Each project is different so are the needs. With the ideas in the manifesto, and your needs, you should figure out what might work out for you.
 - Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the manifesto might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
-- It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, consider should start tackling the issue. 
+- It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, you should consider start tackling the issue. 
 
 ## Example app 🍷
 If you are eager to see an example of an app with a µFeatures architecture you can check out the [example app](https://github.com/microfeatures/example). It's structured following the principles described in the following sections.
@@ -80,7 +81,7 @@ Reusing code across apps and other products like extensions is encouraged using 
 Foundation µFeatures contain foundational tools *(wrappers, extensions, ...)* that are combined to build other µFeatures. Thus all other µFeatures have access to the foundation ones. Some examples of foundations µFeatures are:
 
 - **µUI:** Provides custom views, UIKit extensions, fonts, and colors that are used to build user-facing layouts.
-- **µTesting:** Facilitates testing by providing XCTest extension as well as custom assertions.
+- **µTesting:** Facilitates testing by providing XCTest extensions as well as custom assertions.
 - **µCore:** It can be seen as the `Foundation` of your app, providing tools such as analytics reporter, logger, API client or a storage class.
 
 In practice, foundation µFeatures expose **Interfaces (Structs, Classes, Enums)** and **extensions** of platform frameworks such as `XCTest`, `Foundation` or `UIKit`. 
@@ -97,9 +98,12 @@ In practice, foundation µFeatures expose **Interfaces (Structs, Classes, Enums)
 ## Dependencies ⚙️
 
 
-## Ideas
-- Features have APIs
+## Shortcomings 🙈
+#### Maintenance
+// TODO
 
+#### Explicitness
+// TODO
 
 
 ## Resources 📚
