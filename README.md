@@ -54,7 +54,9 @@ A µFeature represents an application feature and is a combination of the follow
 
 The diagram below shows the 4 targets and the dependencies between them:
 
-![µFeature components](/assets/diagram.png)
+<p align="center">
+    <img src="/assets/diagram.png" width="200" max-width="50%" alt="µFeature components" />
+</p>
 
 ## Why a µFeature 🐛
 
