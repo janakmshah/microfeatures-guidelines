@@ -40,6 +40,9 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 - Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the manifesto might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
 - It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, consider should start tackling the issue. 
 
+## Example app 🍷
+If you are eager to see an example of an app with a µFeatures architecture you can check out the [example app](https://github.com/microfeatures/example). It's structured following the principles described in the following sections.
+
 ## Core principle 🐝
 
 Developers should be able to **build, test and try** their features fast, with independence of the main app. 
