@@ -9,6 +9,8 @@
 - [Core Principle](#core-principle-)
 - [What is a µFeature](#what-is-a-µfeature-)
 - [Why a µFeature](#why-a-µfeature-)
+- [Types of µFeatures](#types-of-µfeatures-)
+- [Layers](#layers-)
 - [Dependencies](#dependencies-)
 
 ## What 🤔
@@ -72,7 +74,23 @@ When all the app source code lives in the same target is very easy to build impl
 #### Reusability
 Reusing code across apps and other products like extensions is encouraged using frameworks or libraries. By building µFeatures reusing them is pretty straightforward. We can build an iMessage extension, a Today Extension, or a watchOS application by just combining existing µFeatures and adding *(when necessary)* platform-specific UI layers.
 
-## Layers
+## Types of µFeatures 🐤
+
+### Foundation
+Foundation µFeatures contain foundational tools *(wrappers, extensions, ...)* that are combined to build other µFeatures. Thus all other µFeatures have access to the foundation ones. Some examples of foundations µFeatures are:
+
+- **µUI:** Provides custom views, UIKit extensions, fonts, and colors that are used to build user-facing layouts.
+- **µTesting:** Facilitates testing by providing XCTest extension as well as custom assertions.
+- **µCore:** It can be seen as the `Foundation` of your app, providing tools such as analytics reporter, logger, API client or a storage class.
+
+In practice, foundation µFeatures expose **Interfaces (Structs, Classes, Enums)** and **extensions** of platform frameworks such as `XCTest`, `Foundation` or `UIKit`. 
+
+> Note: Foundation µFeatures don't expose static instances that are globally accessed. As we'll see later, it's up to the app to control the lifecycle of those foundation dependencies, and pass them to other µFeatures using dependency injection.
+
+### Product
+
+
+## Layers 🐬
 
 
 
