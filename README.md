@@ -38,6 +38,7 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 - Don't expect this to be a silver-bullet to your problems. You should take the core ideas, process them, and apply the principles to your project/s.
 - Each project is different so are the needs. With the ideas in the manifesto, and your needs, you should figure out what might work out for you.
 - Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the manifesto might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
+- It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, consider should start tackling the issue. 
 
 ## Core principle 🐝
 
@@ -52,6 +53,8 @@ A µFeature represents an application feature and is a combination of the follow
 - **Example:** Contains an example app that developers can use to try out the feature under certain conditions *(different languages, screen sizes, settings)*.
 
 The diagram below shows the 4 targets and the dependencies between them:
+
+![µFeature components](/assets/diagram.png)
 
 ## Why a µFeature 🐛
 
