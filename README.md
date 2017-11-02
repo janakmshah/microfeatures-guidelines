@@ -1,3 +1,4 @@
+![Logo](assets/logo.png)
 # µFeatures Manifesto
 
 ## Index 📝
@@ -34,7 +35,7 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 
 - Don't expect this to be a silver-bullet to your problems. You should take the core ideas, process them, and apply the principles to your project/s.
 - Each project is different so are the needs. With the ideas in the manifesto, and your needs, you should figure out what might work out for you.
-- Since everything this architecture depends on is evolving *(tools, languages, concepts)*, this might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
+- Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the manifesto might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
 
 ## What is a µFeature 📱
 
