@@ -52,12 +52,26 @@ A µFeature represents an application feature and is a combination of the follow
 
 The diagram below shows the 4 targets and the dependencies between them:
 
+## Why a µFeature 🐛
+
+#### Clear and concise APIs
+When all the app source code lives in the same target is very easy to build implicit dependencies in code, and end up with the so well-known spaguetti code. Everything is strongly coupled, the state is sometimes unpredictable, and introducing new changes become a nightmare. When we define features in independent targets we need to design public APIs as part of our feature implementation. We need to decide what should be public, how our feature should be consumed, what should remain private. We have more control over how we want our feature *"clients"* to use the feature and we can enforce good practises by designing safe APIs.
+
+#### Small modules
+Divide and conquer. Minimalism
+
+#### Reusability
+TODO
 
 ## Layers
 
 
 
 ## Dependencies ⚙️
+
+
+## Ideas
+- Features have APIs
 
 
 
