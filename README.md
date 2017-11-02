@@ -6,6 +6,7 @@
 - [Contex](#context-)
 - [Motivation](#motivation-)
 - [Before reading](#before-reading-)
+- [Core Principle](#core-principle-)
 - [What is a µFeature](#what-is-a-µfeature-)
 - [Dependencies](#dependencies-)
 
@@ -37,9 +38,27 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 - Each project is different so are the needs. With the ideas in the manifesto, and your needs, you should figure out what might work out for you.
 - Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the manifesto might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
 
+## Core principle 🐝
+
+Developers should be able to **build, test and try** their features fast, with independence of the main app. 
+
 ## What is a µFeature 📱
+A µFeature represents an application feature and is a combination of the following 4 targets *(referring with target to a Xcode target)*:
+
+- **Source:** Contains the feature source code *(Swift, Objective-C, C++, React Native...)* and its resources *(images, fonts, storyboards, xibs)*.
+- **Tests:** Contains the feature unit and integration tests.
+- **Testing:** Provides testing data that can be used for the tests and from the example app. It also provide mocks for uFeature classes and protocols that can be used by other features as we'll see later.
+- **Example:** Contains an example app that developers can use to try out the feature under certain conditions *(different languages, screen sizes, settings)*.
+
+The diagram below shows the 4 targets and the dependencies between them:
+
+
+## Layers
+
+
 
 ## Dependencies ⚙️
+
 
 
 ## Resources 📚
