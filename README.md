@@ -5,6 +5,8 @@
 - [Contex](#context)
 - [Motivation](#motivation)
 - [Before reading](#before-reading)
+- [What is a µFeature](#what-is-a-µFeature)
+- [Dependencies](#dependencies)
 
 ## What
 
@@ -21,9 +23,16 @@ Apps are made of features. Typically these features are part of the same module,
 This is frequently a big source of frustration when it comes to work on those projects. The time we spend goes into compiling rather than building and experimenting with the platform.
 
 ## Motivation
-The µFeatures approach's main motivation is to support scalability of large iOS codebases leveraging platform features and tools. There are other solutions out there that could be also be considered to overcome those issues. A very popular one nowadays is [React Native](https://facebook.github.io/react-native/) that leverages the Javascript dynamism to offer developers a pleasant experience working in the code base, but at the same time a native experience from the user point of view.
+The µFeatures's main motivation is to support the scalability of large iOS codebases leveraging platform features and tools. There are other solutions out there that could be also be considered to overcome those issues. A very popular one nowadays is [React Native](https://facebook.github.io/react-native/) that leverages the Javascript dynamism to offer developers a pleasant experience working in the code base, but at the same time a native experience from the user point of view.
 
 ## Before reading
+- Don't expect this to be a silver-bullet to your problems. You should take the core ideas, process them, and apply the principles to your project/s.
+- Each project is different so are the needs. With the ideas in the manifesto, and your needs, you should figure out what might work out for you.
+- Since everything this architecture depends on is evolving *(tools, languages, concepts)*, this might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
+
+## What is a µFeature
+
+## Dependencies
 
 
 ## Resources
