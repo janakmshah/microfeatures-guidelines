@@ -1,12 +1,12 @@
 # µFeatures Manifesto
 
 ## Index 📝
-- [What](#what)
-- [Contex](#context)
-- [Motivation](#motivation)
-- [Before reading](#before-reading)
-- [What is a µFeature](#what-is-a-µFeature)
-- [Dependencies](#dependencies)
+- [What](#what-)
+- [Contex](#context-)
+- [Motivation](#motivation-)
+- [Before reading](#before-reading-)
+- [What is a µFeature](#what-is-a-µfeature-)
+- [Dependencies](#dependencies-)
 
 ## What 🤔
 
