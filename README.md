@@ -8,6 +8,7 @@
 - [Before reading](#before-reading-)
 - [Core Principle](#core-principle-)
 - [What is a µFeature](#what-is-a-µfeature-)
+- [Why a µFeature](#why-a-µfeature-)
 - [Dependencies](#dependencies-)
 
 ## What 🤔
@@ -58,10 +59,10 @@ The diagram below shows the 4 targets and the dependencies between them:
 When all the app source code lives in the same target is very easy to build implicit dependencies in code, and end up with the so well-known spaguetti code. Everything is strongly coupled, the state is sometimes unpredictable, and introducing new changes become a nightmare. When we define features in independent targets we need to design public APIs as part of our feature implementation. We need to decide what should be public, how our feature should be consumed, what should remain private. We have more control over how we want our feature *"clients"* to use the feature and we can enforce good practises by designing safe APIs.
 
 #### Small modules
-Divide and conquer. Minimalism
+[Divide and conquer](https://en.wikipedia.org/wiki/Divide_and_conquer). Working in small modules allows you to have more focus and test and try the feature in isolation. Moreover, development cycles are much faster since we have a more selective compilation, compiling only the components that are necessary to get our feature working. The compilation of the whole app is only necessary at the very end of our work, when we need to integrate the feature into the app.
 
 #### Reusability
-TODO
+Reusing code across apps and other products like extensions is encouraged using frameworks or libraries. By building µFeatures reusing them is pretty straightforward. We can build an iMessage extension, a Today Extension, or a watchOS application by just combining existing µFeatures and adding *(when necessary)* platform-specific UI layers.
 
 ## Layers
 
