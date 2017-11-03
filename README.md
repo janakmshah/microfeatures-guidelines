@@ -124,6 +124,7 @@ class Services {
 In the example above, `Services.swift` works a a static container, initializing all the services and tools with their initial state. Some of these services might need to know about the application lifecycle. We could subscribe to those notifications internally but we'd be coupling the service to the `NotificationCenter` and the platform-specific lifecycle notifications. What we could do instead is explicitly notifying them about the lifecycle events from the app delegate.
 
 ```swift
+// AppDelegate.swift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -134,10 +135,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
+### Views/ViewControllers
 
+On the other side, product µFeatures can also expose views and view controllers. These views usually encapsulate the logic to update themselves according to internal state changes, and react to user actions, turning those actions into state updates *(e.g. synchronizing data with the API)*.
 
-### Views
+```swift
+// Home.swift in uHome
+import UIKit
+import uCore
 
+public class Home {
+    let client: Client
+    public init(client: Client) {
+        self.client = client
+    }
+    public func makeViewController(delegate: HomeDelegate) -> UIViewController {
+        return HomeViewController(client: client, delegate: delegate)
+    }
+}
+```
+The example above shows how the home µFeature looks like. It gets initialized with its dependencies and expose a method that instantiates and returns a view controller to be used from the app. Notice that the method returns a `UIViewController` instead of a `HomeViewController`. By doing that we abstract the app from any implementation detail.
+
+#### Delegating navigation
+You might have noticed that we pass a delegate when we instantiate the view controller. The delegate responds to actions that trigger a navigation to a different feature. It's up to the app to define the navigation between different features. A pattern that works very well here is the [Coordinator Pattern](https://vimeo.com/144116310) that allows you represent your navigation as a tree of coordinators. These coordinators would be in the app, responding to features actions, and triggering the navigation to other coordinators.
+
+Delegating the navigation to the app gives us the flexibility to change the navigation based on the product where we are consuming the feature from. Let's take an hypothetical search feature that exposes a search view controller. When use that view controller from the app, we want to navigate to another feature when the user taps in one of the search results. However, if we use that view controller from an iMessage extension, we want the action to be different, and instead, share the search result with one of your contacts.
 
 ## Layers 🐬
 
