@@ -10,6 +10,7 @@
 - [What is a µFeature](#what-is-a-µfeature-)
 - [Why a µFeature](#why-a-µfeature-)
 - [Types of µFeatures](#types-of-µfeatures-)
+- [Hooking µFeatures](#hooking-µfeatures-)
 - [Layers](#layers-)
 - [Dependencies](#dependencies-)
 - [Multiplatform µFeatures](multiplatform-µfeatures-)
@@ -90,6 +91,17 @@ In practice, foundation µFeatures expose **Interfaces (Structs, Classes, Enums)
 > :warning: Note: Foundation µFeatures shouldn't expose static instances that are globally accessed. As we'll see later, it's up to the app to control the lifecycle of those foundation dependencies, and pass them to other µFeatures using dependency injection.
 
 ### Product
+Product µFeatures contain features that the user can feel and interact with. They are built by combining foundation µFeatures. Some examples of product µFeatures are:
+
+- **µSearch:** Contains your product search feature that allows users searching content on the platform.
+- **µPayments:** Contains the business logic to handle payment flows and upsell screens to upgrade users to premium plans.
+- **µHome:** Contains the product home screen with the most recent platform content.
+
+> Product µFeatures usually represent your product's features.
+
+In practice, product µFeatures expose **views** and **services**. In the following sections we'll see how the app target uses those views and services to build up the app.
+
+## Hooking µFeatures 🦊
 
 
 ## Layers 🐬
