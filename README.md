@@ -103,6 +103,41 @@ In practice, product µFeatures expose **views** and **services**. In the follow
 
 ## Hooking µFeatures 🦊
 
+As we mentioned earlier, µFeatures **don't expose instances** and it's the app responsibility to create instances and use them. How we instantiate and hook µFeatures depends on the type of µFeature.
+
+### Services
+
+ Apps usually have services or utils whose state is tied to the application lifecycle. Those instances are global and the majority of the features will need to access them. 
+
+```swift
+// Services.swift in the main application
+import uCore
+import uPlayback
+
+class Services {
+    static let playback = PlaybackService() // From uPlayback
+    static let client = Client(baseUrl: "https://api.shakira.io") // From uCore
+    static let analytics = Analytics(firebaseKey: "xxx") // From uCore
+}
+```
+
+In the example above, `Services.swift` works a a static container, initializing all the services and tools with their initial state. Some of these services might need to know about the application lifecycle. We could subscribe to those notifications internally but we'd be coupling the service to the `NotificationCenter` and the platform-specific lifecycle notifications. What we could do instead is explicitly notifying them about the lifecycle events from the app delegate.
+
+```swift
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        Services.playback.restoreState()    
+    }
+    
+}
+```
+
+
+
+### Views
+
 
 ## Layers 🐬
 
