@@ -15,6 +15,7 @@
 - [Dependencies](#dependencies-)
 - [Multiplatform µFeatures](multiplatform-µfeatures-)
 - [Shortcomings](#shortcomings-)
+- [FAQ](#faq-)
 
 ## What 🤔
 
@@ -187,10 +188,26 @@ Product µFeatures don't depend on each other, instead we use the **dependency i
 
 ## Shortcomings 🙈
 #### Maintenance
-// TODO
+µFeatures are Xcdoe projects with multiple targets that share the same base configuration. Although the configuration defined in build settings can be extracted into `.xcconfig` file, there are other settings that can't be extracted to be reused:
 
-#### Explicitness
-// TODO
+- The targets per µFeature project.
+- The schemes available.
+- The configurations available in each project.
+
+It makes the setup very cumbersome to maintain. For example, if you want to introduce a new configuration, you need to manually add the configuration in each µProject. Moreover, if you want to add a new µFeature, the process is very manual since there's no official API that allows you to automate some steps.
+
+Fortunately, there are tools like [XcodeGen](https://github.com/yonaskolb/XcodeGen) and struct [Struct](https://github.com/lyptt/struct) that can turn specification files into Xcode projects. Moreover, from the µFeatures GitHub organization we are working on a new tool, [Xcode Project Manager](https://github.com/microfeatures/xcode-project-manager) that will help you manage your modular Xcode projects easily *(stay tuned)*. 
+
+## FAQ 🐿
+
+#### One or multiple Git repositories?
+If you are working with git branches, we recommend you to keep everything in the same repository for convenience reasons. Facebook is a good example of a huge company keeping all the project in a single repositories and Uber [wrote about it](https://eng.uber.com/ios-monorepo/) a year ago.
+
+#### External dependencies?
+This architecture doesn't limit you from using external dependencies. There's one thing to keep in mind though, you won't be able to use [CocoaPods](https://cocoapods.org) dependencies with your µFeatures. CocoaPods is not able to analyze your dependencies tree, and setup all the targets in the stack accordingly. If you want to use an external dependency from a µFeature framework we recommend you to use [Carthage](https://github.com/carthage)
+
+#### Can I include resources?
+You can, but remember that you can only do it if your µFeature is a framework and not a library.
 
 
 ## Resources 📚
