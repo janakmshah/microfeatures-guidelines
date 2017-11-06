@@ -13,7 +13,7 @@
 - [Hooking µFeatures](#hooking-µfeatures-)
 - [Layers](#layers-)
 - [Dependencies](#dependencies-)
-- [Cross-platform µFeatures](cross-platform-µfeatures-)
+- [Cross-platform µFeatures](#cross-platform-µfeatures-)
 - [Shortcomings](#shortcomings-)
 - [FAQ](#faq-)
 
