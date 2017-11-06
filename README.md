@@ -23,7 +23,7 @@ uFeatures is an architectural approach to structure iOS applications to enable s
 
 This manifesto introduces the principles of the architecture, helping you identify and organize your application features in different layers. It also introduces tips, tools and advices if you decide for this architecture.
 
-> The name uFeatures (Microfeatures)* is inspired by the backend Microservices architecture, where different "backend features" run as different services with defined APIS to enable communication between them.
+> The name uFeatures *(Microfeatures)* comes from the Microservices architecture, where different "backend features" run as different services with defined APIS to enable communication between them.
 
 ## Context 🥑
 
@@ -41,7 +41,7 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 
 ## Before reading 🍒
 
-- Don't expect this to be a silver-bullet to your problems. You should take the core ideas, process them, and apply the principles to your project/s.
+- Don't expect this to be a silver-bullet solution to your problems. You should take the core ideas, process them, and apply the principles to your projects.
 - Each project is different so are the needs. With the ideas in the manifesto, and your needs, you should figure out what might work out for you.
 - Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the manifesto might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
 - It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, you should consider start tackling the issue. 
@@ -182,6 +182,63 @@ Product µFeatures don't depend on each other, instead we use the **dependency i
 - It decouples the targets in the same layer, removing the need to compile all the dependencie when we try to compile a single product µFeature *(faster compilation)*.
 
 ## Dependencies ⚙️
+
+As soon as you start building µFeatures you'll realize that most of the features need dependencies that are injected from the app. We could inject those dependencies in the constructor but we'd end up with constructors with a long list of parameters being passed. Instead, we could leverage protocols to represent the µFeatures dependencies and pass them easily *(credits to [@andreacipriani](https://github.com/andreacipriani) for coming up with this approach)*:
+
+```swift
+public protocol BaseDependencies {
+    func makeClient() -> Client
+    func makeLogger() -> Logger
+}
+```
+
+A protocol defines the base dependencies that are the most common dependencies across all the features. Dependencies are exposed through methods that return the dependency as a return parameter of those methods.
+
+```swift
+class AppDependencies: BaseDependencies {
+    func makeClient() -> Client {
+        return Services.client
+    }
+    func makeLogger() -> Logger {
+        return Services.logger
+    }
+}
+```
+
+From the app we conform the `BaseDependencies` protocol, defining a class, `AppDependencies` that represents our application base dependencies.
+
+```swift
+public protocol SearchDependencies: BaseDependencies {
+    func makeAnalytics() -> Analytics
+}
+```
+
+For some particular µFeatures, we might need some extra dependencies. We can define those in a new protocol that conforms the `BaseDependencies` protocol, adding the extra dependencies. In the example below `SearchDependencies` exposes also an `Analytics` dependency.
+
+```swift
+public final class SearchBuilder {
+
+    private let dependenciesSolver: SearchDependencies
+
+    public init(dependenciesSolver: SearchDependencies) {
+        self.dependenciesSolver = dependenciesSolver
+    }
+
+    public func makeViewController() -> UIViewController {
+        let client = dependenciesSolver.makeClient()
+        let analytics = dependenciesSolver.makeLogger()
+        return SearchViewController(client: client, logger: logger)
+    }
+}
+
+// From the app
+let searchBuilder = SearchBuilder(dependenciesSolver: AppDependencies())
+```
+
+The example above shows how we can inject dependencies in a builder that builds the µFeature instance, in this case a `UIViewController`.
+
+> Note: This is just an example of how we can simplify dependency injection. There are other alternatives out there. It's up to you to pick up the one that works best for your project and setup.
+
 
 ## Cross-platform µFeatures ⌚️📱💻📺
 Your product might be available in different platforms or from different products. In that case it's very important that we reuse as much code as possible. `Foundation` APIs are very similar across plaftorms, with just some subtle differences, but UI frameworks like `UIKit` or `AppKit` are not. We could have multiplatform µFeatures by using [Swift macros](http://ericasadun.com/2014/06/06/swift-cross-platform-code/) that conditionally compile UI for each of the platforms. However, Xcode is very bad dealing with those macros and the syntax highlghting and the autocompletion don't work very well.
