@@ -1,5 +1,5 @@
 ![Logo](assets/logo.png)
-# µFeatures Manifesto
+# µFeatures Guidelines
 
 ## Index 📝
 - [What](#what-)
@@ -21,7 +21,7 @@
 
 uFeatures is an architectural approach to structure iOS applications to enable scalability, optimizing build and testing cycles, and ensuring good practices in your team. Its core idea is to build your apps by building independent features that are interconnected using clear and concise APIS.
 
-This manifesto introduces the principles of the architecture, helping you identify and organize your application features in different layers. It also introduces tips, tools and advices if you decide for this architecture.
+This guidelines introduces the principles of the architecture, helping you identify and organize your application features in different layers. It also introduces tips, tools and advices if you decide for this architecture.
 
 > The name uFeatures *(Microfeatures)* comes from the Microservices architecture, where different "backend features" run as different services with defined APIS to enable communication between them.
 
@@ -42,8 +42,8 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 ## Before reading 🍒
 
 - Don't expect this to be a silver-bullet solution to your problems. You should take the core ideas, process them, and apply the principles to your projects.
-- Each project is different so are the needs. With the ideas in the manifesto, and your needs, you should figure out what might work out for you.
-- Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the manifesto might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this manifesto up to date.
+- Each project is different so are the needs. With the ideas in the guidelines, and your needs, you should figure out what might work out for you.
+- Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the guidelines might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this guidelines up to date.
 - It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, you should consider start tackling the issue. 
 
 ## Example app 🍷
