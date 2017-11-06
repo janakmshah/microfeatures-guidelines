@@ -189,7 +189,7 @@ Your product might be available in different platforms or from different product
 There is something we can do though to enable cross-platform µFeatures. Splitting business logic and UI in two different layers, one that contains the business layer and is cross-platform, and another one that contains the UI and that is platform/product specific.
 
 <p align="center">
-    <img src="/assets/diagram.png" width="200" max-width="50%" alt="µFeature components" />
+    <img src="/assets/cross-platform.png" width="200" max-width="50%" alt="Cross platform µFeatures" />
 </p>
 
 The image above shows how the Search µFeature is split into the business logic target, `µSearch` and the platform specific ones `µSearchiOS` and `µSearchmacOS`. Both UI frameworks depend on `µSearch`. Each of those targets would have their corresponding tests target. 
