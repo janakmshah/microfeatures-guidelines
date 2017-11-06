@@ -157,12 +157,28 @@ public class Home {
 The example above shows how the home µFeature looks like. It gets initialized with its dependencies and expose a method that instantiates and returns a view controller to be used from the app. Notice that the method returns a `UIViewController` instead of a `HomeViewController`. By doing that we abstract the app from any implementation detail.
 
 #### Delegating navigation
-You might have noticed that we pass a delegate when we instantiate the view controller. The delegate responds to actions that trigger a navigation to a different feature. It's up to the app to define the navigation between different features. A pattern that works very well here is the [Coordinator Pattern](https://vimeo.com/144116310) that allows you represent your navigation as a tree of coordinators. These coordinators would be in the app, responding to features actions, and triggering the navigation to other coordinators.
+You might have noticed that we pass a delegate when we instantiate the view controller. The delegate responds to actions that trigger a navigation to a different µFeature. It's up to the app to define the navigation between different µFeatures. A pattern that works very well here is the [Coordinator Pattern](https://vimeo.com/144116310) that allows you represent your navigation as a tree of coordinators. These coordinators would be in the app, responding to µFeatures actions, and triggering the navigation to other coordinators.
 
-Delegating the navigation to the app gives us the flexibility to change the navigation based on the product where we are consuming the feature from. Let's take an hypothetical search feature that exposes a search view controller. When use that view controller from the app, we want to navigate to another feature when the user taps in one of the search results. However, if we use that view controller from an iMessage extension, we want the action to be different, and instead, share the search result with one of your contacts.
+Delegating the navigation to the app gives us the flexibility to change the navigation based on the product where we are consuming the µFeature from. Let's take an hypothetical search µFeature that exposes a search view controller. When use that view controller from the app, we want to navigate to another µFeature when the user taps in one of the search results. However, if we use that view controller from an iMessage extension, we want the action to be different, and instead, share the search result with one of your contacts.
 
 ## Layers 🐬
 
+We talked about µFeatures, types, and how to use them from the app, but we missed  out a very important point, how to organize them to prevent ending up with a messy dependency graph or eventually with circular dependencies impossible to resolve for the compiler.
+
+It's recommended to organize the µFeatures in three layers below the product layer as shown in the image below.
+
+<p align="center">
+    <img src="/assets/layers.png" width="200" max-width="50%" alt="µFeatures layers" />
+</p>
+
+- **Product µFeatures:** Contains all the product µFeatures.
+- **Dependency inversion:** Contains the product µFeatures public interfaces.
+- **Foundation µFeatures:** Contains all the foundation µFeatures.
+
+Product µFeatures don't depend on each other, instead we use the **dependency inversion principle** to expose their interfaces in a layer underneath them. There are a couple of reasons to support this:
+
+- It delegates to the app the decission about how different features are connected. We could decide in a product-basis.
+- It decouples the targets in the same layer, removing the need to compile all the dependencie when we try to compile a single product µFeature *(faster compilation)*.
 
 ## Dependencies ⚙️
 
