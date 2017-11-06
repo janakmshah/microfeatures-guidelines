@@ -13,7 +13,7 @@
 - [Hooking µFeatures](#hooking-µfeatures-)
 - [Layers](#layers-)
 - [Dependencies](#dependencies-)
-- [Multiplatform µFeatures](multiplatform-µfeatures-)
+- [Cross-platform µFeatures](cross-platform-µfeatures-)
 - [Shortcomings](#shortcomings-)
 - [FAQ](#faq-)
 
@@ -176,25 +176,35 @@ It's recommended to organize the µFeatures in three layers below the product la
 - **Dependency inversion:** Contains the product µFeatures public interfaces.
 - **Foundation µFeatures:** Contains all the foundation µFeatures.
 
-Product µFeatures don't depend on each other, instead we use the **dependency inversion principle** to expose their interfaces in a layer underneath them. There are a couple of reasons to support this:
+Product µFeatures don't depend on each other, instead we use the **dependency inversion principle** to expose their interfaces in a layer underneath them. There are a couple of advantages that support it:
 
 - It delegates to the app the decission about how different features are connected. We could decide in a product-basis.
 - It decouples the targets in the same layer, removing the need to compile all the dependencie when we try to compile a single product µFeature *(faster compilation)*.
 
 ## Dependencies ⚙️
 
-## Multiplatform µFeatures ⌚️📱💻📺
-//TODO
+## Cross-platform µFeatures ⌚️📱💻📺
+Your product might be available in different platforms or from different products. In that case it's very important that we reuse as much code as possible. `Foundation` APIs are very similar across plaftorms, with just some subtle differences, but UI frameworks like `UIKit` or `AppKit` are not. We could have multiplatform µFeatures by using [Swift macros](http://ericasadun.com/2014/06/06/swift-cross-platform-code/) that conditionally compile UI for each of the platforms. However, Xcode is very bad dealing with those macros and the syntax highlghting and the autocompletion don't work very well.
+
+There is something we can do though to enable cross-platform µFeatures. Splitting business logic and UI in two different layers, one that contains the business layer and is cross-platform, and another one that contains the UI and that is platform/product specific.
+
+<p align="center">
+    <img src="/assets/diagram.png" width="200" max-width="50%" alt="µFeature components" />
+</p>
+
+The image above shows how the Search µFeature is split into the business logic target, `µSearch` and the platform specific ones `µSearchiOS` and `µSearchmacOS`. Both UI frameworks depend on `µSearch`. Each of those targets would have their corresponding tests target. 
+
+> You can read more about how to setup frameworks to be cross-platform no the [following link](http://ilya.puchka.me/xcode-cross-platform-frameworks/).
 
 ## Shortcomings 🙈
 #### Maintenance
-µFeatures are Xcdoe projects with multiple targets that share the same base configuration. Although the configuration defined in build settings can be extracted into `.xcconfig` file, there are other settings that can't be extracted to be reused:
+µFeatures are Xcode projects with multiple targets that share the same base configuration. Although the configuration defined in build settings can be extracted into `.xcconfig` file, there are other settings that can't be extracted to be reused:
 
 - The targets per µFeature project.
 - The schemes available.
 - The configurations available in each project.
 
-It makes the setup very cumbersome to maintain. For example, if you want to introduce a new configuration, you need to manually add the configuration in each µProject. Moreover, if you want to add a new µFeature, the process is very manual since there's no official API that allows you to automate some steps.
+Maintaining the setup is very cumbersome. For example, if you want to introduce a new configuration, you need to manually add the configuration in each project. Moreover, if you want to add a new µFeature, the process is very manual since there's no official API that allows you to automate some steps.
 
 Fortunately, there are tools like [XcodeGen](https://github.com/yonaskolb/XcodeGen) and struct [Struct](https://github.com/lyptt/struct) that can turn specification files into Xcode projects. Moreover, from the µFeatures GitHub organization we are working on a new tool, [Xcode Project Manager](https://github.com/microfeatures/xcode-project-manager) that will help you manage your modular Xcode projects easily *(stay tuned)*. 
 
@@ -202,6 +212,9 @@ Fortunately, there are tools like [XcodeGen](https://github.com/yonaskolb/XcodeG
 
 #### One or multiple Git repositories?
 If you are working with git branches, we recommend you to keep everything in the same repository for convenience reasons. Facebook is a good example of a huge company keeping all the project in a single repositories and Uber [wrote about it](https://eng.uber.com/ios-monorepo/) a year ago.
+
+#### How do you version µFeatures?
+If µFeatures are part of the same repository, they are versioned with the app. If you have them in different repositories you can use Git Submodules, Carthage, or your own dependency resolver to fetch specific versions of your µFeatures to link from the app.
 
 #### External dependencies?
 This architecture doesn't limit you from using external dependencies. There's one thing to keep in mind though, you won't be able to use [CocoaPods](https://cocoapods.org) dependencies with your µFeatures. CocoaPods is not able to analyze your dependencies tree, and setup all the targets in the stack accordingly. If you want to use an external dependency from a µFeature framework we recommend you to use [Carthage](https://github.com/carthage)
