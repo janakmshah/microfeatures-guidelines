@@ -3,7 +3,7 @@
 
 ## Index 📝
 - [What](#what-)
-- [Contex](#context-)
+- [Context](#context-)
 - [Motivation](#motivation-)
 - [Before reading](#before-reading-)
 - [Core Principle](#core-principle-)
