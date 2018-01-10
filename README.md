@@ -263,7 +263,6 @@ The image above shows how the Search µFeature is split into the business logic 
 
 Maintaining the setup is very cumbersome. For example, if you want to introduce a new configuration, you need to manually add the configuration in each project. Moreover, if you want to add a new µFeature, the process is very manual since there's no official API that allows you to automate some steps.
 
-Fortunately, there are tools like [XcodeGen](https://github.com/yonaskolb/XcodeGen) and struct [Struct](https://github.com/lyptt/struct) that can turn specification files into Xcode projects. Moreover, from the µFeatures GitHub organization we are working on a new tool, [Xcode Project Manager](https://github.com/microfeatures/xcode-project-manager) that will help you manage your modular Xcode projects easily *(stay tuned)*. 
 
 ## FAQ 🐿
 
