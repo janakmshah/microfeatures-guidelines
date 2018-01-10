@@ -47,7 +47,7 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 - It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, you should consider start tackling the issue. 
 
 ## Example app 🍷
-If you are eager to see an example of an app with a µFeatures architecture you can check out the [example app](https://github.com/microfeatures/example). It's structured following the principles described in the following sections.
+If you are eager to see an example of an app with a µFeatures architecture you can check out the [example app](https://github.com/pepibumur/microfeatures-example). It's structured following the principles described in the following sections.
 
 ## Core principle 🐝
 
