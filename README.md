@@ -1,6 +1,8 @@
 ![Logo](assets/logo.png)
 # µFeatures Guidelines
 
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/pepibumur)
+
 ## Index 📝
 - [What](#what-)
 - [Contex](#context-)
