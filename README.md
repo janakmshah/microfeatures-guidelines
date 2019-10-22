@@ -5,7 +5,7 @@
 
 ## Index 📝
 - [What](#what-)
-- [Contex](#context-)
+- [Context](#context-)
 - [Motivation](#motivation-)
 - [Before reading](#before-reading-)
 - [Core Principle](#core-principle-)
@@ -21,11 +21,11 @@
 
 ## What 🤔
 
-uFeatures is an architectural approach to structure iOS applications to enable scalability, optimizing build and testing cycles, and ensuring good practices in your team. Its core idea is to build your apps by building independent features that are interconnected using clear and concise APIS.
+uFeatures is an architectural approach to structure iOS applications to enable scalability, optimize build and testing cycles, and ensure good practices in your team. Its core idea is to build your apps by building independent features that are interconnected using clear and concise APIs.
 
-This guidelines introduces the principles of the architecture, helping you identify and organize your application features in different layers. It also introduces tips, tools and advices if you decide for this architecture.
+These guidelines introduce the principles of the architecture, helping you identify and organize your application features in different layers. It also introduces tips, tools and advice if you decide to use this architecture.
 
-> The name uFeatures *(Microfeatures)* comes from the Microservices architecture, where different "backend features" run as different services with defined APIS to enable communication between them.
+> The name uFeatures *(Microfeatures)* comes from the Microservices architecture, where different "backend features" run as different services with defined APIs to enable communication between them.
 
 ## Context 🥑
 
@@ -44,7 +44,7 @@ The µFeatures's main motivation is to support the scalability of large iOS code
 ## Before reading 🍒
 
 - Don't expect this to be a silver-bullet solution to your problems. You should take the core ideas, process them, and apply the principles to your projects.
-- Each project is different so are the needs. With the ideas in the guidelines, and your needs, you should figure out what might work out for you.
+- Each project is different, and so are the needs. With the ideas in the guidelines, and your needs, you should figure out what might work out for you.
 - Since everything this architecture depends on is evolving *(tools, languages, concepts)*, the guidelines might get outdated very quickly. If that happens, don't hesitate to open a PR and contribute with keeping this guidelines up to date.
 - It can very tempting to scale your app architecture before it actually needs it. If your app needs it, you'll notice it, and only at that point, you should consider start tackling the issue. 
 
@@ -72,7 +72,7 @@ The diagram below shows the 4 targets and the dependencies between them:
 ## Why a µFeature 🐛
 
 #### Clear and concise APIs
-When all the app source code lives in the same target is very easy to build implicit dependencies in code, and end up with the so well-known spaguetti code. Everything is strongly coupled, the state is sometimes unpredictable, and introducing new changes become a nightmare. When we define features in independent targets we need to design public APIs as part of our feature implementation. We need to decide what should be public, how our feature should be consumed, what should remain private. We have more control over how we want our feature *"clients"* to use the feature and we can enforce good practises by designing safe APIs.
+When all the app source code lives in the same target is very easy to build implicit dependencies in code, and end up with the so well-known spaghetti code. Everything is strongly coupled, the state is sometimes unpredictable, and introducing new changes become a nightmare. When we define features in independent targets we need to design public APIs as part of our feature implementation. We need to decide what should be public, how our feature should be consumed, what should remain private. We have more control over how we want our feature *"clients"* to use the feature and we can enforce good practises by designing safe APIs.
 
 #### Small modules
 [Divide and conquer](https://en.wikipedia.org/wiki/Divide_and_conquer). Working in small modules allows you to have more focus and test and try the feature in isolation. Moreover, development cycles are much faster since we have a more selective compilation, compiling only the components that are necessary to get our feature working. The compilation of the whole app is only necessary at the very end of our work, when we need to integrate the feature into the app.
@@ -124,7 +124,7 @@ class Services {
 }
 ```
 
-In the example above, `Services.swift` works a a static container, initializing all the services and tools with their initial state. Some of these services might need to know about the application lifecycle. We could subscribe to those notifications internally but we'd be coupling the service to the `NotificationCenter` and the platform-specific lifecycle notifications. What we could do instead is explicitly notifying them about the lifecycle events from the app delegate.
+In the example above, `Services.swift` works as a static container, initializing all the services and tools with their initial state. Some of these services might need to know about the application lifecycle. We could subscribe to those notifications internally, but then we'd be coupling the service to the `NotificationCenter` and the platform-specific lifecycle notifications. What we could do instead is explicitly notifying them about the lifecycle events from the app delegate.
 
 ```swift
 // AppDelegate.swift
@@ -162,7 +162,7 @@ The example above shows how the home µFeature looks like. It gets initialized w
 #### Delegating navigation
 You might have noticed that we pass a delegate when we instantiate the view controller. The delegate responds to actions that trigger a navigation to a different µFeature. It's up to the app to define the navigation between different µFeatures. A pattern that works very well here is the [Coordinator Pattern](https://vimeo.com/144116310) that allows you represent your navigation as a tree of coordinators. These coordinators would be in the app, responding to µFeatures actions, and triggering the navigation to other coordinators.
 
-Delegating the navigation to the app gives us the flexibility to change the navigation based on the product where we are consuming the µFeature from. Let's take an hypothetical search µFeature that exposes a search view controller. When use that view controller from the app, we want to navigate to another µFeature when the user taps in one of the search results. However, if we use that view controller from an iMessage extension, we want the action to be different, and instead, share the search result with one of your contacts.
+Delegating the navigation to the app gives us the flexibility to change the navigation based on the product where we are consuming the µFeature from. Let's take an hypothetical search µFeature that exposes a search view controller. When we use that view controller from the app, we want to navigate to another µFeature when the user taps in one of the search results. However, if we use that view controller from an iMessage extension, we want the action to be different, and instead, share the search result with one of your contacts.
 
 ## Layers 🐬
 
@@ -275,7 +275,7 @@ If you are working with git branches, we recommend you to keep everything in the
 If µFeatures are part of the same repository, they are versioned with the app. If you have them in different repositories you can use Git Submodules, Carthage, or your own dependency resolver to fetch specific versions of your µFeatures to link from the app.
 
 #### External dependencies?
-This architecture doesn't limit you from using external dependencies. There's one thing to keep in mind though, you won't be able to use [CocoaPods](https://cocoapods.org) dependencies with your µFeatures. CocoaPods is not able to analyze your dependencies tree, and setup all the targets in the stack accordingly. If you want to use an external dependency from a µFeature framework we recommend you to use [Carthage](https://github.com/carthage)
+This architecture doesn't limit you from using external dependencies. There's one thing to keep in mind though: you won't be able to use [CocoaPods](https://cocoapods.org) dependencies with your µFeatures. CocoaPods is not able to analyze your dependencies tree, and setup all the targets in the stack accordingly. If you want to use an external dependency from a µFeature framework, we recommend you to use [Carthage](https://github.com/carthage).
 
 #### Can I include resources?
 You can, but remember that you can only do it if your µFeature is a framework and not a library.
