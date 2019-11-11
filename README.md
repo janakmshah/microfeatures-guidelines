@@ -228,8 +228,9 @@ public final class SearchBuilder {
 
     public func makeViewController() -> UIViewController {
         let client = dependenciesSolver.makeClient()
-        let analytics = dependenciesSolver.makeLogger()
-        return SearchViewController(client: client, logger: logger)
+        let logger = dependenciesSolver.makeLogger()
+        let analytics = dependenciesSolver.makeAnalytics()
+        return SearchViewController(client: client, logger: logger, analytics: analytics)
     }
 }
 
